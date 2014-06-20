@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+    /*
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      */
+    </style>
+
+    <style type="text/css" media="screen">
+          @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+          @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+
+          body { font-family: 'Droid Serif'; }
+          h1, h2, h3 {
+            font-family: 'Yanone Kaffeesatz';
+            font-weight: 400;
+            margin-bottom: 0;
+            margin-top: 10px;
+          }
+          h1 { font-size: 3.5em; }
+          h2 { font-size: 3em; }
+          h3 { font-size: 1.6em; }
+
+          .remark-slide-content {
+            background-color: #E9E9E9;
+            line-height: 30px;
+          }
+
+          .inverse {
+            background: #272822;
+            color: #ABACA7;
+            text-shadow: 0 0 20px #333;
+          }
+          .inverse h1, .inverse h2 {
+            color: #f3f3f3;
+            line-height: 0.8em;
+          }
+
+          .remark-code {
+            font-size: 16px;
+            line-height: 18px;
+          }
+
+          a {
+            color: #F92672;
+            text-decoration: none;
+          }
+          .right {
+            float: right;
+            margin-left: 1em;
+          }
+          .pushdown {
+            margin-top: 12em;
+          }
+          .logo img {
+            width: 200px;
+          }
+
+          .logo-md img {
+            width: 50px;
+          }
+
+          .logo-sm img {
+            width: 50px;
+          }
+
+          .logo-bottom-right {
+            position: absolute;
+            bottom: 30px;
+            right: 24px;
+          }
+
+          .logo-top-left {
+            position: absolute;
+            top: 6px;
+            left: 16px;
+          }
+
+          ul li {
+            margin-bottom: 6px;
+          }
+        </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+.logo-sm.logo-top-left[![Default-aligned image](dakota.png)]
+.logo[![Default-aligned image](logo.png)]
+
+# Grunt.js: The Javascript Task Runner
+### by @justin_walsh
+
+---
+
+layout: true
+class: middle, inverse
+
+.logo-md.logo-bottom-right[![Default-aligned image](logo.png)]
+.logo-sm.logo-top-left[![Default-aligned image](dakota.png)]
+
+---
+
+class: center
+
+# What is Grunt.js?
+
+--
+
+> Grunt.js is a JavaScript task runner that helps you perform repetitive tasks such as minification, compilation, unit testing or linting.
+
+???
+
+Jason is awesome!
+
+---
+
+class: center
+
+#  Why use it?
+
+In one word: automation. The less work you have to do when performing repetitive tasks like minification, compilation, unit testing, linting, etc, the easier your job becomes. After you've configured it, a task runner can do most of that mundane work for you—and your team—with basically zero effort.
+
+---
+
+#  Grunt.js Use Cases
+
+* Running local webservers
+* Running tests
+* Watching for file changes
+* Minifing code and images
+* Running jshint
+* Creating builds
+* Running shell commands
+* Running node.js processes
+* Manipulating directories and files
+* Deploying to remote servers
+* Compiling CoffeeScript, Less, Saas, Handlebars, Jade...
+
+### There are over 3,000 plugins!
+
+---
+
+#  Grunt.js Requirements
+
+1. Install Node.js & npm
+2. There are no other requirements
+
+---
+
+class: center
+
+# Installing Grunt.js
+
+```bash
+npm install -g grunt-cli
+```
+
+---
+
+# Creating Your First GruntFile.js
+
+```
+module.exports = function(grunt) {
+    grunt.initConfig({
+        // Tasks go here
+        jshint: {...},
+        copy: {...},
+        watch: {...}
+    });
+
+    // Load each plugin you `npm install`
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    // Register a default task that runs when calling `grunt`
+    grunt.registerTask('default', ['jshint', 'copy', 'watch']);
+};
+
+```
+
+---
+
+## Example 1: Linting source whenever code changes
+
+```
+module.exports = function(grunt) {
+    grunt.initConfig({
+        jshint: {
+            app: ['js/**/*.js'],
+            options: {
+                force: true, // Continue on errors
+                undef: true, // Check for missing vars
+                devel: true, // Allows console.log
+                browser: true, // Allows use of things like window.
+                globals: {
+                    "App": true,
+                    "Ember": true
+                }
+            }
+        }
+    });
+
+    // Load each plugin you `npm install`
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+
+    // Register a default task that runs when calling `grunt`
+    grunt.registerTask('default', ['jshint']);
+};
+```
+
+---
+
+## Example 2: Concatenate js files
+
+```
+module.exports = function(grunt) {
+    grunt.initConfig({
+        jshint: {...},
+*        concat: {
+*            app: {
+*                src: ['js/**/*.js'],
+*                dest: 'dist/built.js'
+*            }
+*        }
+    });
+
+    // Load each plugin you `npm install`
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+*    grunt.loadNpmTasks('grunt-contrib-concat');
+
+    // Register a default task that runs when calling `grunt`
+*    grunt.registerTask('default', ['jshint', 'concat']);
+};
+```
+
+---
+
+## Example 3: Uglify js files
+
+```
+module.exports = function(grunt) {
+    grunt.initConfig({
+        jshint: {...},
+        concat: {...},
+*        uglify: {
+*            app: {
+*                src: 'dist/built.js',
+*                dest: 'dist/built.min.js'
+*            }
+        }
+    });
+
+    // Load each plugin you `npm install`
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+*    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    // Register a default task that runs when calling `grunt`
+*    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+};
+```
+
+---
+
+## Example 4: Watching for changes
+
+```
+module.exports = function(grunt) {
+    grunt.initConfig({
+        jshint: {...},
+        concat: {...},
+        uglify: {...},
+*        watch: {
+*            app: {
+*                files: ['js/**/*.js'],
+*                tasks: ['jshint', 'concat', 'uglify']
+*            }
+*        }
+    });
+
+    // Load each plugin you `npm install`
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+*    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    // Register a default task that runs when calling `grunt`
+*    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'watch']);
+};
+```
+
+---
+
+# Advanced Uses
+
+* Replacing environment variables in build step
+* Creating zip files for distribution
+* Using livereload to reload your browser on changes
+* Uploading compiled assets to an Amazon S3 account
+* Invalidating a CDN when assets are uploaded
+* Calling webhooks when process are completed
+* Sending emails when tasks fail
+* Precompiling Ember or Angular templates
+* Generating source maps for js
+* Run your tests for php :)
+
+---
+
+# Useful plugins
+
+* **grunt-concurrent** - Run grunt tasks concurrently. This task is also useful if you need to run multiple blocking tasks like nodemon and watch at once, as seen in the example config.
+* **grunt-hub** - A Grunt task to watch and run tasks on multiple Grunt projects
+* **grunt-neuter** - Builds source files in the order you require
+* **load-grunt-tasks** - Load multiple grunt tasks using globbing patterns
+
+---
+
+# console.log('The End');
+
+Slideshow made using remark.js [http://remarkjs.com/](http://remarkjs.com/)
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightLanguage: 'javascript',
+        highlightStyle: 'monokai'
+      });
+    </script>
+  </body>
+</html>
