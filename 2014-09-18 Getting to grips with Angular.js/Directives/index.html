@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <title>Todo App</title>
+</head>
+<body ng-app=>
+    <div class="container">
+    <div class="page-header">
+        <h1>Todo app</h1>
+    </div>
+
+    <div>
+        <div class="row">
+            <form class="pull-left form-horizontal col-md-10">
+                <div class="form-group">
+                    <label for="input-owner" class="control-label col-xs-2">Task</label>
+                    <div class="col-xs-10">
+                        <input ng-model="task" type="text" class="form-control" id="input-owner" placeholder="Enter a task"> {{ task }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br/>
+        <div class="row" ng-init="list = ['Jump into a taxi and scream “Follow that car!”','Go trick-or-treating on April fool’s day.',
+                    'Walk into Sea World with a fishing pole.','Dress up as a pro wrestler, challenge people to title matches.',
+                    'Participate in a Chewbacca roaring contest']">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Task</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in list">
+                    <td>{{ item }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

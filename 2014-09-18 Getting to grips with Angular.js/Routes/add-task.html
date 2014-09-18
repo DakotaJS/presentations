@@ -1,0 +1,19 @@
+<div class="row">
+    <form class="pull-left form-horizontal col-md-10">
+        <div class="form-group">
+            <label for="input-owner" class="control-label col-xs-2">Owner</label>
+            <div class="col-xs-10">
+                <input ng-model="task.owner" type="text" class="form-control" id="input-owner" placeholder="Enter a owner"> {{ task.owner }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-task" class="control-label col-md-2">Task</label>
+            <div class="col-xs-10">
+                <input ng-model="task.task" type="text" class="form-control" id="input-task" placeholder="Enter a task"> {{ task.item }}
+            </div>
+        </div>
+        <button ng-click="addTask()" type="button" class="btn btn-success pull-right">Add Task</button>
+    </form>
+    <div>{{ myVal }}</div>
+</div>
+<br/>
