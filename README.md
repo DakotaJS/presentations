@@ -6,6 +6,7 @@ Visit the [DakotaJS Meetup](http://www.meetup.com/DakotaJS/) page to learn more 
 
 ### Past Presentations
 
+* 9/18/2014 - [Deploy to Heroku](2014-09-18 Deploy to Heroku/) by Justin Walsh
 * 6/19/2014 - [Intro to Grunt.js](2014-06-19 Intro to Grunt/) by Justin Walsh
 
 ### Contributing
