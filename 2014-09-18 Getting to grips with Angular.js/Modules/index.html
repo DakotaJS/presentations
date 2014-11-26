@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <title>Todo App</title>
+</head>
+<body ng-app="todoapp">
+    <div class="container">
+        <div class="page-header">
+            <h1>Todo app</h1>
+        </div>
+
+        <div ng-controller="TaskCtrl">
+            <div class="row">
+                <form class="pull-left form-horizontal">
+                    <div class="form-group">
+                        <label for="input-owner" class="control-label col-xs-2">Owner</label>
+                        <div class="col-xs-10">
+                            <input ng-model="task.owner" type="text" class="form-control" id="input-owner" placeholder="Enter a owner"> {{ task.owner }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-task" class="control-label col-xs-2">Task</label>
+                        <div class="col-xs-10">
+                            <input ng-model="task.item" type="text" class="form-control" id="input-task" placeholder="Enter a task"> {{ task.item }}
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success">Add Task</button>
+                </form>
+            </div>
+            <br/>
+            <div class="row">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Task</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in taskList">
+                        <td>{{ item.owner }}</td>
+                        <td>{{ item.task }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        angular.module('todoapp',[])
+                .controller('TaskCtrl', function($scope){
+                    $scope.taskList = [
+                        {
+                            owner: 'Luis',
+                            task: 'Participate in a Chewbacca roaring contest'
+                        },{
+                            owner: 'Luis',
+                            task: 'Walk into Sea World with a fishing pole.'
+                        },{
+                            owner: 'Collin',
+                            task: 'Jump into a taxi and scream “Follow that car!”'
+                        },{
+                            owner: 'Luis',
+                            task: 'Go trick-or-treating on April fool’s day'
+                        },{
+                            owner: 'Collin',
+                            task: 'Dress up as a pro wrestler, challenge people to title matches'
+                        }
+                    ];
+                    $scope.task = {};
+                    $scope.task.item = "";
+                })
+    </script>
+</body>
+</html>
